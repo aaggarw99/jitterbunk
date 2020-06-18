@@ -1,15 +1,23 @@
-{% load staticfiles %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-
 <h1>Latest Bunks</h1>
 
 {% if latest_bunk_list %}
     <ul>
     {% for bunk in latest_bunk_list %}
-        <li>{{ bunk }}</li>
+        <li><a href="{% url 'jb:detail' bunk.id %}">{{ bunk }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>There are currently no bunks.</p>
+{% endif %}
+
+<h1>Users You Can Bunk!</h1>
+
+{% if all_user_profiles %}
+    <ul>
+        {% for up in all_user_profiles %}
+            <li><a href="{% url 'jb:userprofile' up.id %}">{{up.user.first_name}} {{up.user.last_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No users you can bunk right now :(</p>
 {% endif %}
