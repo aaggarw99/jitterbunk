@@ -1,0 +1,7 @@
+{% if userprofile %}
+    <h1>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</h1>
+    <h3>{{userprofile.user.email}}</h3> 
+{% else %}
+    <h1>Can't find information on such user :(</h1>
+{% endif %}
+// TOOD: bunk button

@@ -2,8 +2,9 @@ from django.conf.urls import url
 
 from . import views
 
+# TODO: pk/up_id
 urlpatterns = [
-	url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>[0-9]+)/userprofile/$', views.UserProfileView.as_view(), name='userprofile'),
+	url(r'^$', views.index, name='index'),
+    url(r'^(?P<bunk_id>[0-9]+)/$', views.bunk_detail, name='bunk_detail'),
+    url(r'^userprofile/(?P<up_id>[0-9]+)/$', views.user_profile, name='user_profile'),
 ]

@@ -19,9 +19,12 @@ class Bunk(models.Model):
     - FROM_USER, TO_USER fields to denote which users sent a bunk
     - TIMESTAMP field denoting the time of when the bunk was sent
     """
-    from_user = models.OneToOneField(UserProfile, related_name="from_user")
-    to_user = models.OneToOneField(UserProfile, related_name="to_user")
-    timestamp = models.DateTimeField('bunking date')
+    # related_name denotes the relationship from User to UserProfile
+    # TODO: foreign key fields instead
+    from_user = models.OneToOneField(UserProfile, related_name="to_user")
+    to_user = models.OneToOneField(UserProfile, related_name="from_user")
+    # auto_now defaults the time to now
+    timestamp = models.DateTimeField('bunking date', auto_now=True)
 
     def __str__(self):
         return self.from_user.user.first_name + " --> " + self.to_user.user.first_name + " @ " + str(self.timestamp)

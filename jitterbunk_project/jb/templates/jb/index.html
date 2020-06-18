@@ -3,7 +3,7 @@
 {% if latest_bunk_list %}
     <ul>
     {% for bunk in latest_bunk_list %}
-        <li><a href="{% url 'jb:detail' bunk.id %}">{{ bunk }}</a></li>
+        <li><a href="{% url 'jb:bunk_detail' bunk.id %}">{{ bunk }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -15,7 +15,7 @@
 {% if all_user_profiles %}
     <ul>
         {% for up in all_user_profiles %}
-            <li><a href="{% url 'jb:userprofile' up.id %}">{{up.user.first_name}} {{up.user.last_name}}</a></li>
+            <li><a href="{% url 'jb:user_profile' up.id %}">{{up.user.first_name}} {{up.user.last_name}}</a></li>
         {% endfor %}
     </ul>
 {% else %}
