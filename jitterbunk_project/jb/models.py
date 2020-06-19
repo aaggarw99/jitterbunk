@@ -21,8 +21,9 @@ class Bunk(models.Model):
     """
     # related_name denotes the relationship from User to UserProfile
     # TODO: foreign key fields instead
-    from_user = models.OneToOneField(UserProfile, related_name="to_user")
-    to_user = models.OneToOneField(UserProfile, related_name="from_user")
+    from_user = models.ForeignKey(UserProfile, related_name="bunk_received")
+    to_user = models.ForeignKey(UserProfile, related_name="bunk_sent")
+
     # auto_now defaults the time to now
     timestamp = models.DateTimeField('bunking date', auto_now=True)
 

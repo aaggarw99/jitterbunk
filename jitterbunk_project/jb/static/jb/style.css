@@ -1,3 +1,60 @@
-li a {
+td a {
     text-decoration: none;
+}
+
+h1#landing {
+    text-align: center;
+}
+
+.table1 {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto
+}
+
+th {
+    background: teal;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  }
+
+
+a {color:orange;}         /* Unvisited link  */
+a:visited {color:orange;} /* Visited link    */
+a:hover {color:black;}   /* Mouse over link */
+a:active {color:black;}  /* Selected link   */
+
+img#profile {
+    height: auto; 
+    width: auto; 
+    max-width: 10%; 
+    max-height: 10%;
+}
+
+img#bunk {
+    width: 100px;
+    height: 100px;
+}
+
+div#item {
+    /* To correctly align image, regardless of content height: */
+    vertical-align: top;
+    display: inline-block;
+    /* To horizontally center images and caption */
+    text-align: center;
+    /* The width of the container also implies margin around the images. */
+    width: 120px;
+}
+
+.caption {
+    /* Make the caption a block so it occupies its own line. */
+    display: block;
+}
+
+div#bunked_text {
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+    vertical-align: middle;
 }

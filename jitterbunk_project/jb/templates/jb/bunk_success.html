@@ -1,0 +1,12 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'jb/style.css' %}" />
+
+
+{% if userprofile1 and userprofile2 %}
+    <h1>{{userprofile1.user.first_name}} successfully bunked {{userprofile2.user.first_name}}!</h1>
+    <a href="{% url 'jb:user_profile' userprofile2.id %}">Go Back</a>
+
+{% else %}
+    <h1>Error in processing request!</h1>
+{% endif %}

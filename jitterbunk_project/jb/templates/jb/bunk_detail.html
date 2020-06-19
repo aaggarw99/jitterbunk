@@ -1,3 +1,19 @@
-<h1>{{bunk.from_user.user.first_name}} bunked {{bunk.to_user.user.first_name}}</h1>
-<h3>{{bunk.timestamp}}</h3>
-// TODO: add profile pictures
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'jb/style.css' %}" />
+{% if bunk %}
+
+    <div id="item">
+        <img src={{bunk.from_user.photo}} id="bunk">
+        <span class="caption">{{bunk.from_user.user.first_name}} {{bunk.from_user.user.last_name}}</span>
+    </div>
+
+    <div id="bunked_text">
+        bunked
+    </div>
+
+    <div id="item">
+        <img src={{bunk.to_user.photo}} id="bunk">
+        <span class="caption">{{bunk.to_user.user.first_name}} {{bunk.to_user.user.last_name}}</span>
+    </div>
+{% endif %}
