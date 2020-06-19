@@ -20,10 +20,10 @@ th {
   }
 
 
-a {color:orange;}         /* Unvisited link  */
-a:visited {color:orange;} /* Visited link    */
-a:hover {color:black;}   /* Mouse over link */
-a:active {color:black;}  /* Selected link   */
+td a {color:black;}         /* Unvisited link  */
+td a:visited {color:black;} /* Visited link    */
+td a:hover {color:grey;}   /* Mouse over link */
+td a:active {color:black;}  /* Selected link   */
 
 img#profile {
     height: auto; 
@@ -58,3 +58,92 @@ div#bunked_text {
     width: 120px;
     vertical-align: middle;
 }
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  * {
+    margin:0;
+    padding:0;
+    font-family: Tahoma;
+    box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+  }
+
+  body{
+    background-color: lightblue;
+  }
+  nav ul li a {
+    color: #FFF;
+    text-decoration: none;
+  }
+  /* End General */
+  
+  /* Start Navbar */
+  nav ul {
+    background-color: blue;
+  }
+  nav ul > li {
+    padding: 15px;
+    display: inline-block;
+    transition: all .3s ease;
+    margin-left: -5px
+  }
+  nav ul > li:not(:last-of-type):hover {
+    background-color: #222
+  }
+  nav ul > li:first-of-type {
+    background-color: #222
+  }
+  nav ul > li:last-of-type {
+    float: right;
+  }
+  nav ul > li:last-of-type a .fa {
+    font-size: 21px
+  }
+  /* End Navbar */
+  
+  /* Start Menue Right */
+  nav ul > li:last-of-type {
+    position: relative;
+  }
+  nav ul > ol {
+    position: absolute;
+    top: 49px;
+    right: 0;
+    background: #333;
+    text-align: center;
+    list-style: none;
+    display: none
+  }
+  nav ul > ol > li {
+    width: 100vw;
+    color: #FFF;
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: all .3s ease;
+  }
+  nav ul > ol > li:hover a {
+    margin: 20px;
+  }
+  nav ul > ol > li:hover {
+    background: pink;
+    cursor: pointer
+  }
+  nav ul input {
+    opacity: .7;
+    padding: 5px;
+    float: right;
+    display: none
+  }

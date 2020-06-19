@@ -7,11 +7,12 @@
     <img src={{userprofile.photo}} id="profile"> 
     <h1>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</h1>
     <h3>{{userprofile.user.email}}</h3>
-
-    <form action="{% url 'jb:bunked' user1_id=5 user2_id=userprofile.id %}" method="post">
+    {% if user.is_authenticated %}
+    <form action="{% url 'jb:bunked' user1_id=user.userprofile.id user2_id=userprofile.id %}" method="post">
         {% csrf_token %}
         <input type="submit" value="Bunk" />
     </form>
+    {% endif %}
 
     <a href="{% url 'jb:index' %}">Go Back</a>
 

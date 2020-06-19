@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import UserProfile, Bunk
 from django.utils import timezone
 from django.views import generic
-
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -22,7 +22,6 @@ def index(request):
     # render loads the template in one line
     return render(request, 'jb/index.html', context)
 
-
 def bunk_detail(request, bunk_id):
     """
     Loads the bunk detail page that gives more information about
@@ -38,6 +37,7 @@ def user_profile(request, up_id):
     up = get_object_or_404(UserProfile, pk=up_id)
     return render(request, "jb/user_profile.html", {"userprofile" : up})
 
+@login_required
 def bunk(request, user1_id, user2_id):
     """
     Performs bunk action where USER1_ID bunks USER2_ID.

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'jb/style.css' %}" />
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<nav>
+  <ul>
+    <li><a href="{% url 'jb:index' %}">Jitterbunk</a></li>
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'jb:user_profile' user.id %}">{{ user.first_name }} {{ user.last_name }}</a></li>
+      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+    {% else %}
+      <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+
+<body>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
