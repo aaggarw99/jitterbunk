@@ -49,3 +49,15 @@ def bunk(request, user1_id, user2_id):
     new_bunk.save()
 
     return render(request, "jb/bunk_success.html", {"userprofile1":user1, "userprofile2":user2})
+
+@login_required
+def user_feed(request, user_id):
+    """
+    Displays the signed in user's own bunk feed.
+    """
+    print(type(user_id))
+    user_id = int(user_id)
+    bunk_id_list = [b.id for b in Bunk.objects.all() if b.from_user.id == user_id or b.to_user.id == user_id]
+    bunk_list = [get_object_or_404(Bunk, pk=bid) for bid in bunk_id_list]
+
+    return render(request, "jb/user_feed.html", {"bunk_list" : bunk_list})
