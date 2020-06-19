@@ -61,3 +61,32 @@ def user_feed(request, user_id):
     bunk_list = [get_object_or_404(Bunk, pk=bid) for bid in bunk_id_list]
 
     return render(request, "jb/user_feed.html", {"bunk_list" : bunk_list})
+
+def bunk_statistics(request):
+    """
+    Displays all bunk statistics supported.
+    """
+    userprofiles = UserProfile.objects.all()
+
+    num_bunks_sent = {up:0 for up in userprofiles}
+    num_bunks_received = {up:0 for up in userprofiles}
+
+    for bunk in Bunk.objects.all():
+        num_bunks_sent[bunk.from_user] += 1
+        num_bunks_received[bunk.to_user] += 1
+
+    statistics = [
+        Statistic("Number of Bunks Sent", "Shows the number of bunks each user has sent.", num_bunks_sent),
+        Statistic("Number of Bunks Received", "Shows the number of bunks each user has received.", num_bunks_received)
+    ]
+
+    return render(request, "jb/statistics.html", {"statistics" : statistics, "userprofiles" : userprofiles})
+
+
+
+class Statistic:
+    
+    def __init__(self, name, description, user_value):
+        self.name = name
+        self.description = description
+        self.user_value = user_value

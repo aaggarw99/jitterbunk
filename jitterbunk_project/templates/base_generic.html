@@ -8,6 +8,7 @@
 <nav>
   <ul>
     <li><a href="{% url 'jb:index' %}">Jitterbunk</a></li>
+    <li><a href="{% url 'jb:statistics' %}">Statistics</a></li>
     {% if user.is_authenticated %}
       <li><a href="{% url 'jb:user_profile' user.userprofile.id %}">{{ user.first_name }} {{ user.last_name }}</a></li>
       <li><a href="{% url 'jb:user_feed' user.userprofile.id %}">My Feed</a></li>

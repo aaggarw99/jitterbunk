@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<body>
+    <div>
+        <h1 id="landing">Statistics</h1>
+
+        {% if statistics and userprofiles %}
+
+            {% for stat in statistics %}
+                <table class='table1' cellpadding='0' cellspacing='10px'>
+                    <th>User</th>
+                    <th>{{stat.name}}</th>
+                    {% for up, value in stat.user_value.items %}
+                        <tr>
+                            <td><a href="{% url 'jb:user_profile' up.id">{{up.user.first_name}} {{up.user.last_name}}</a></td>
+                            <td>{{value}}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            {% endfor %}
+
+        {% else %}
+            <p style="text-align: center">No statistics supported!</p>
+        {% endif %}
+    </div>
+</body>
+{% endblock %}
