@@ -1,7 +1,6 @@
-{% load staticfiles %}
+{% extends 'base_generic.html' %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'jb/style.css' %}" />
-
+{% block content %}
 
 {% if userprofile1 and userprofile2 %}
     <h1>{{userprofile1.user.first_name}} successfully bunked {{userprofile2.user.first_name}}!</h1>
@@ -10,3 +9,5 @@
 {% else %}
     <h1>Error in processing request!</h1>
 {% endif %}
+
+{% endblock %}

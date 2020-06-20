@@ -1,19 +1,23 @@
-{% load staticfiles %}
+{% extends 'base_generic.html' %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'jb/style.css' %}" />
+{% block content %}
+
 {% if bunk %}
+    <div class='center-screen'>
+        <div id="item">
+            <img src={{bunk.from_user.photo}} id="bunk">
+            <span class="caption">{{bunk.from_user.user.first_name}} {{bunk.from_user.user.last_name}}</span>
+        </div>
 
-    <div id="item">
-        <img src={{bunk.from_user.photo}} id="bunk">
-        <span class="caption">{{bunk.from_user.user.first_name}} {{bunk.from_user.user.last_name}}</span>
-    </div>
+        <div id="bunked_text">
+            bunked
+        </div>
 
-    <div id="bunked_text">
-        bunked
-    </div>
-
-    <div id="item">
-        <img src={{bunk.to_user.photo}} id="bunk">
-        <span class="caption">{{bunk.to_user.user.first_name}} {{bunk.to_user.user.last_name}}</span>
+        <div id="item">
+            <img src={{bunk.to_user.photo}} id="bunk">
+            <span class="caption">{{bunk.to_user.user.first_name}} {{bunk.to_user.user.last_name}}</span>
+        </div>
     </div>
 {% endif %}
+
+{% endblock %}
