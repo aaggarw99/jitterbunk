@@ -7,7 +7,7 @@
             <img src={{userprofile.photo}} id="profile"> 
             <h1>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</h1>
             <h3>{{userprofile.user.email}}</h3>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user.userprofile.id != userprofile.id %}
             <form action="{% url 'jb:bunked' user1_id=user.userprofile.id user2_id=userprofile.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="Bunk" />
