@@ -7,7 +7,7 @@ class UserProfile(models.Model):
     - USER points to the auth.User object of a user
     - PHOTO holds a link to a user's photo.
     """
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,)
     photo = models.CharField(max_length=200, default="", blank=True)
 
     def __str__(self):
@@ -21,8 +21,8 @@ class Bunk(models.Model):
     """
     # related_name denotes the relationship from User to UserProfile
     # TODO: foreign key fields instead
-    from_user = models.ForeignKey(UserProfile, related_name="bunk_received")
-    to_user = models.ForeignKey(UserProfile, related_name="bunk_sent")
+    from_user = models.ForeignKey(UserProfile, related_name="bunk_received", on_delete=models.CASCADE,)
+    to_user = models.ForeignKey(UserProfile, related_name="bunk_sent", on_delete=models.CASCADE,)
 
     # auto_now defaults the time to now
     timestamp = models.DateTimeField('bunking date', auto_now=True)

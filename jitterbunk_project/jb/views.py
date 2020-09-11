@@ -1,9 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import UserProfile, Bunk
+from .models import Bunk, UserProfile
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets, permissions
+from rest_framework.decorators import api_view, permission_classes
+from jb.serializers import BunkSerializer, UserProfileSerializer
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -22,6 +28,7 @@ def index(request):
     # render loads the template in one line
     return render(request, 'jb/index.html', context)
 
+
 def bunk_detail(request, bunk_id):
     """
     Loads the bunk detail page that gives more information about
@@ -30,12 +37,14 @@ def bunk_detail(request, bunk_id):
     bunk = get_object_or_404(Bunk, pk=bunk_id)
     return render(request, "jb/bunk_detail.html", {'bunk': bunk})
 
+
 def user_profile(request, up_id):
     """
     Loads a user's profile page.
     """
     up = get_object_or_404(UserProfile, pk=up_id)
     return render(request, "jb/user_profile.html", {"userprofile" : up})
+
 
 @login_required
 def bunk(request, user1_id, user2_id):
@@ -50,6 +59,7 @@ def bunk(request, user1_id, user2_id):
 
     return render(request, "jb/bunk_success.html", {"userprofile1":user1, "userprofile2":user2})
 
+
 @login_required
 def user_feed(request, user_id):
     """
@@ -61,6 +71,7 @@ def user_feed(request, user_id):
     bunk_list = [get_object_or_404(Bunk, pk=bid) for bid in bunk_id_list]
 
     return render(request, "jb/user_feed.html", {"bunk_list" : bunk_list})
+
 
 def bunk_statistics(request):
     """
@@ -82,6 +93,29 @@ def bunk_statistics(request):
 
     return render(request, "jb/statistics.html", {"statistics" : statistics, "userprofiles" : userprofiles})
 
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticatedOrReadOnly])
+def list_bunks(request):
+    """
+    API endpoint to access a list of all bunks.
+    """
+    if request.method == "GET":
+        bunks = Bunk.objects.order_by('-timestamp').select_related('from_user', 'to_user')
+        serializer = BunkSerializer(bunks, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticatedOrReadOnly])
+def list_users(request):
+    """
+    API endpoint to access a list of all users.
+    """
+    if request.method == "GET":
+        userprofiles = UserProfile.objects.select_related('user')
+        serializer = UserProfileSerializer(userprofiles, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 class Statistic:
